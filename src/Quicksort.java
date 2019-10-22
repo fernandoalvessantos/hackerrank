@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Quicksort32 {
+public class Quicksort {
 
     public static Integer[] arranjo = null;
 
@@ -12,19 +12,35 @@ public class Quicksort32 {
             arranjo[i]= scan.nextInt();
         }
 
-        int indicePivo =  qtd/2;
-        organiza(0, indicePivo);
-        organiza(indicePivo, arranjo.length-1);
+        for (int i=0;i<arranjo.length;i++){
+            if(organiza())
+                break;
+        }
         imprime(arranjo);
     }
 
-    private static void organiza(int menor, int maior) {
-        int valor = arranjo[maior];
-        for(int i=menor; i<maior;i++){
-            if(arranjo[i] > valor){
-                troca(i, maior);
+    private static boolean organiza() {
+        for (int i=0;i<arranjo.length;i++){
+            for (int j=i+1;j<arranjo.length;j++){
+                if(arranjo[i] > arranjo[j]) {
+                    troca(i, j);
+                }
             }
         }
+        imprime(arranjo);
+        boolean retorno = true;
+        for (int i=0;i<arranjo.length;i++) {
+            for (int j = i + 1; j < arranjo.length; j++) {
+                if(arranjo[i] > arranjo[j]) {
+                    retorno = false;
+                    break;
+                }
+
+            }
+            if(!retorno)
+                break;
+        }
+        return retorno;
     }
 
 
